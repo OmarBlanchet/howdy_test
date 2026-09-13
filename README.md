@@ -45,27 +45,29 @@ The API is available at `http://127.0.0.1:8000`.
 
 Request body:
 
-```json
+````json
 {
   "title": "Prepare report",
   "description": "Send the monthly report",
   "status": "pending",
   "priority": "HIGH"
 }
-```
+Run the unit tests. The configured pytest command also measures coverage and generates an HTML report at `htmlcov/index.html`:
 
 `priority` accepts `LOW`, `MEDIUM`, or `HIGH`. It defaults to `MEDIUM`. The response status is `201 Created`.
-
+python -m pytest
 ```powershell
 curl.exe -X POST http://127.0.0.1:8000/tasks `
 	-H "Content-Type: application/json" `
 	-d '{"title":"Prepare report","description":"Send the monthly report","priority":"HIGH"}'
-```
+````
 
 Task titles must be unique. A duplicate title returns `409 Conflict` with the message `Task title already exists`.
+Open the HTML coverage report in a browser:
 
 ### List tasks
 
+Start-Process .\htmlcov\index.html
 `GET /tasks`
 
 Optionally filter by priority:
